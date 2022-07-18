@@ -3,6 +3,7 @@ package com.example.geektrust.registration.enums;
 public enum RegistrationStatus {
   ACCEPTED,
   CANCEL_ACCEPTED,
+  CONFIRMED,
 
-  CONFIRMED;
+  COURSE_CANCELLED;
 }

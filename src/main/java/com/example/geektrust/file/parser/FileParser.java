@@ -1,6 +1,6 @@
-package com.example.geektrust.file.processor;
+package com.example.geektrust.file.parser;
 
-import com.example.geektrust.file.processor.pojo.FileParserInput;
+import com.example.geektrust.file.parser.pojo.FileParserInput;
 import com.example.geektrust.lms.pojo.LMSInput;
 import java.util.List;
 

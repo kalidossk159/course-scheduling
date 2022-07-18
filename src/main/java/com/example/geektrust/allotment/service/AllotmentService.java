@@ -1,9 +1,10 @@
 package com.example.geektrust.allotment.service;
 
-import com.example.geektrust.lms.pojo.LMSInput;
+import com.example.geektrust.allotment.pojo.AllotmentInput;
+import com.example.geektrust.lms.pojo.LMSOutput;
 
 public interface AllotmentService {
 
-  public void allotCourse(LMSInput lmsInput);
+  public LMSOutput allotCourse(AllotmentInput lmsInput);
 
 }

@@ -1,15 +1,15 @@
 package com.example.geektrust.manage.bean;
 
 import com.example.geektrust.allotment.service.AllotmentService;
-import com.example.geektrust.allotment.service.impl.IntuitAllotmentServiceImpl;
+import com.example.geektrust.allotment.service.impl.AllotmentServiceImpl;
 import com.example.geektrust.course.service.CourseService;
-import com.example.geektrust.course.service.impl.IntuitCourseServiceImpl;
+import com.example.geektrust.course.service.impl.CourseServiceImpl;
 import com.example.geektrust.datastore.DataStore;
 import com.example.geektrust.datastore.impl.InMemoryDataStore;
 import com.example.geektrust.lms.service.LMS;
 import com.example.geektrust.lms.service.impl.LMSImpl;
 import com.example.geektrust.registration.service.RegistrationService;
-import com.example.geektrust.registration.service.impl.IntuitRegistrationServiceImpl;
+import com.example.geektrust.registration.service.impl.RegistrationServiceImpl;
 
 public class BeanManager {
 
@@ -20,15 +20,15 @@ public class BeanManager {
   }
 
   public static AllotmentService getAllotmentService(){
-    return new IntuitAllotmentServiceImpl();
+    return new AllotmentServiceImpl();
   }
 
   public static RegistrationService getRegistrationService(){
-    return new IntuitRegistrationServiceImpl();
+    return new RegistrationServiceImpl();
   }
 
   public static CourseService getCourseService(){
-    return new IntuitCourseServiceImpl();
+    return new CourseServiceImpl();
   }
 
   public static DataStore getDataStore(){

@@ -1,9 +1,9 @@
-package com.example.geektrust.file.processor.impl;
+package com.example.geektrust.file.parser.impl.txt;
 
 import com.example.geektrust.constant.Constants;
 import com.example.geektrust.exception.LMSException;
-import com.example.geektrust.file.processor.FileParser;
-import com.example.geektrust.file.processor.pojo.FileParserInput;
+import com.example.geektrust.file.parser.FileParser;
+import com.example.geektrust.file.parser.pojo.FileParserInput;
 import com.example.geektrust.lms.enums.LMSCommand;
 import com.example.geektrust.lms.pojo.LMSInput;
 import com.example.geektrust.message.Message;
@@ -47,13 +47,13 @@ public class TxtFileParser extends FileParser {
 
   private LMSInput createLMSInput(String inputLine){
     String[] tokens = inputLine.split(Constants.WHITESPACE);
-    if(tokens.length < PARAMS_START_INDEX + 1){
+    if(tokens.length <= PARAMS_START_INDEX){
       return new LMSInput(Message.INPUT_DATA_ERROR);
     }
 
     LMSCommand lmsCommand = LMSCommand.fromCommand(tokens[COMMAND_INDEX]);
     String[] params = Arrays.copyOfRange(tokens, PARAMS_START_INDEX, tokens.length);
-    return new LMSInput(lmsCommand, params);
+    return TxtInputToLmsInputConverter.convert(lmsCommand, params);
   }
 
 }

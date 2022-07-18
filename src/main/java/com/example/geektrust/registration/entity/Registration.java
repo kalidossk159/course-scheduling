@@ -38,13 +38,14 @@ public class Registration extends Entity<String> {
     registrationStatus = RegistrationStatus.CONFIRMED;
   }
 
+  public void cancelCourse(){ registrationStatus = RegistrationStatus.COURSE_CANCELLED;}
   public boolean isConfirmed(){
     return registrationStatus == RegistrationStatus.CONFIRMED;
   }
-
   public boolean isCancelled(){
     return registrationStatus == RegistrationStatus.CANCEL_ACCEPTED;
   }
+
   @Override
   public Map<IdGenerationKey, String> getIdGenerationData() {
     Map<IdGenerationKey, String> map = new HashMap<>();

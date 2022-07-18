@@ -1,50 +1,58 @@
 package com.example.geektrust.registration.service.impl;
 
+import static com.example.geektrust.constant.CharacterConstants.WHITESPACE;
+
 import com.example.geektrust.course.entity.Course;
 import com.example.geektrust.datastore.DataStore;
 import com.example.geektrust.employee.entity.Employee;
 import com.example.geektrust.entity.Entity;
 import com.example.geektrust.entity.EntityType;
 import com.example.geektrust.id.Id;
-import com.example.geektrust.lms.pojo.LMSInput;
+import com.example.geektrust.lms.pojo.LMSOutput;
 import com.example.geektrust.manage.bean.BeanManager;
 import com.example.geektrust.message.Message;
 import com.example.geektrust.registration.entity.Registration;
+import com.example.geektrust.registration.pojo.CancellationInput;
+import com.example.geektrust.registration.pojo.RegistrationInput;
 import com.example.geektrust.registration.service.RegistrationService;
 import java.util.List;
 
-public class IntuitRegistrationServiceImpl  implements RegistrationService {
+public class RegistrationServiceImpl implements RegistrationService {
 
   private final DataStore dataStore = BeanManager.getDataStore();
   @Override
-  public void register(LMSInput lmsInput) {
-    String params[] = lmsInput.getParams();
-    Course course = (Course) dataStore.find(new Id<>(params[1]), EntityType.COURSE);
+  public LMSOutput register(RegistrationInput registrationInput) {
+    Course course = (Course) dataStore.find(new Id<>(registrationInput.getCourseId()), EntityType.COURSE);
 
+    String output;
     if(isRegistrationPossible(course)){
-      Employee employee = new Employee(params[0]);
+      Employee employee = new Employee(registrationInput.getEmail());
       Registration registration = new Registration(employee, course);
       dataStore.insert(registration);
-      System.out.println(registration.getId() + " " + registration.getRegistrationStatus());
+      output = registration.getId() + WHITESPACE + registration.getRegistrationStatus();
     }
     else {
-      System.out.println(Message.COURSE_FULL);
+      output = Message.COURSE_FULL;
     }
 
+    return new LMSOutput(output);
   }
 
   @Override
-  public void deregister(LMSInput lmsInput) {
-    String params[] = lmsInput.getParams();
-    String registrationId = params[0];
+  public LMSOutput cancel(CancellationInput cancellationInput) {
+    String registrationId = cancellationInput.getRegistrationId();
     Registration registration = (Registration) dataStore.find(new Id<>(registrationId), EntityType.REGISTRATION);
+
+    String output;
     if(registration == null || registration.isConfirmed()){
-      System.out.println(registrationId + " " + Message.CANCEL_REJECTED);
+      output = registrationId + WHITESPACE + Message.CANCEL_REJECTED;
     }
     else {
       registration.cancel();
-      System.out.println(registrationId + " " + registration.getRegistrationStatus());
+      output = registrationId + WHITESPACE + registration.getRegistrationStatus();
     }
+
+    return new LMSOutput(output);
   }
 
   private boolean isRegistrationPossible(Course course){

@@ -1,7 +1,7 @@
-package com.example.geektrust.file.processor;
+package com.example.geektrust.file.parser;
 
 import com.example.geektrust.file.enums.FileExtension;
-import com.example.geektrust.file.processor.impl.TxtFileParser;
+import com.example.geektrust.file.parser.impl.txt.TxtFileParser;
 
 public class FileParserFactory {
 

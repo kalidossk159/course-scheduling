@@ -1,9 +1,10 @@
 package com.example.geektrust.course.service;
 
-import com.example.geektrust.lms.pojo.LMSInput;
+import com.example.geektrust.course.pojo.CourseAdditionInput;
+import com.example.geektrust.lms.pojo.LMSOutput;
 
 public interface CourseService {
 
-  public void addCourse(LMSInput lmsInput);
+  public LMSOutput addCourse(CourseAdditionInput lmsInput);
 
 }

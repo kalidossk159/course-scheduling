@@ -1,6 +1,7 @@
 package com.example.geektrust.course.entity;
 
 import com.example.geektrust.constant.Constants;
+import com.example.geektrust.course.pojo.CourseAdditionInput;
 import com.example.geektrust.entity.Entity;
 import com.example.geektrust.entity.EntityType;
 import com.example.geektrust.id.IdGenerationKey;
@@ -24,13 +25,13 @@ public class Course extends Entity<String> {
     super(EntityType.COURSE, new StringIdGenerator());
   }
 
-  public Course(String name, String instructor, String date, int min, int max){
+  public Course(CourseAdditionInput courseAdditionInput){
     this();
-    this.name = name;
-    this.instructor = instructor;
-    this.date = date;
-    this.min = min;
-    this.max = max;
+    this.name = courseAdditionInput.getCourseName();
+    this.instructor = courseAdditionInput.getInstructor();
+    this.date = courseAdditionInput.getCourseDate();
+    this.min = courseAdditionInput.getMinEmployees();
+    this.max = courseAdditionInput.getMaxEmployees();
   }
 
   @Override

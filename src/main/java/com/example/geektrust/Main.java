@@ -2,10 +2,11 @@ package com.example.geektrust;
 
 import com.example.geektrust.exception.LMSException;
 import com.example.geektrust.file.util.FileUtil;
-import com.example.geektrust.file.processor.FileParser;
-import com.example.geektrust.file.processor.FileParserFactory;
-import com.example.geektrust.file.processor.pojo.FileParserInput;
+import com.example.geektrust.file.parser.FileParser;
+import com.example.geektrust.file.parser.FileParserFactory;
+import com.example.geektrust.file.parser.pojo.FileParserInput;
 import com.example.geektrust.lms.pojo.LMSInput;
+import com.example.geektrust.lms.pojo.LMSOutput;
 import com.example.geektrust.lms.service.LMS;
 import com.example.geektrust.manage.bean.BeanManager;
 import java.io.File;
@@ -13,8 +14,8 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
+        File inputFile = new File(args[0]);
         try {
-            File inputFile = new File(args[0]);
             List<LMSInput> lmsInputs = parseInputFile(inputFile);
             process(lmsInputs);
         } catch (LMSException e){
@@ -37,7 +38,8 @@ public class Main {
         lmsInputs.stream().forEach(lmsInput -> {
             try {
                 if(!lmsInput.hasParseError()){
-                    intuitLms.process(lmsInput);
+                    LMSOutput output = intuitLms.process(lmsInput);
+                    System.out.println(output.getOutput());
                 }
                 else {
                     System.out.println(lmsInput.getParseErrorMessage());

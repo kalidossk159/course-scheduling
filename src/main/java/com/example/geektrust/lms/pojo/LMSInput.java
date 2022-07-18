@@ -6,13 +6,11 @@ public class LMSInput {
 
   private LMSCommand lmsCommand;
 
-  private String[] params;
-
   private String parseErrorMessage;
-  
-  public LMSInput(LMSCommand lmsCommand, String... params){
+
+  public LMSInput(){}
+  public LMSInput(LMSCommand lmsCommand){
     this.lmsCommand = lmsCommand;
-    this.params = params;
   }
 
   public LMSInput(String parseErrorMessage){
@@ -23,14 +21,9 @@ public class LMSInput {
     return lmsCommand;
   }
 
-  public String[] getParams(){
-    return params;
-  }
-
   public boolean hasParseError(){
     return parseErrorMessage != null;
   }
-  public String getParseErrorMessage(){
-    return parseErrorMessage;
-  }
+  public String getParseErrorMessage(){ return parseErrorMessage; }
+
 }

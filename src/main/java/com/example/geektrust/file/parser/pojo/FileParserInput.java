@@ -1,4 +1,4 @@
-package com.example.geektrust.file.processor.pojo;
+package com.example.geektrust.file.parser.pojo;
 
 import java.io.File;
 

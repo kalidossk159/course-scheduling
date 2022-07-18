@@ -7,4 +7,6 @@ public interface CharacterConstants {
 
   public static final String HYPHEN = "-";
 
+  public static final String NEWLINE = "\n";
+
 }
